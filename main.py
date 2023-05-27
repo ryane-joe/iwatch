@@ -16,4 +16,9 @@ def get_basic_info(usrname_tar):
     profile = instaloader.Profile.from_username(loader.context, usrname_tar)
     comp_data = {'username:':profile.username,'user_id':profile.userid,'media_count':profile.mediacount,'follower_count' : profile.followers,'following_count':profile.followees,'bio':profile.biography,'external_url': profile.external_url}
     return comp_data
-print(get_basic_info('username'))
+def download_posts(usrname_tar):
+    profile = instaloader.Profile.from_username(loader.context, usrname_tar)
+    profile.get_posts()
+    
+
+download_posts('ryanejoe_')
