@@ -2,19 +2,7 @@ import instaloader
 import csv
 import os
 import time
-usr = input('enter target username:')
-username = input('enter username:')
-password = input('enter password:')
-try:
-    loader = instaloader.Instaloader()
-    loader.login(username, password)
-    print("Login successful!")
-except instaloader.exceptions.TwoFactorAuthRequiredException:
-    tfa_code = input("Enter 2FA code: ")
-    loader.two_factor_login(tfa_code)
-    print("2FA login successful!")
-except instaloader.exceptions.BadCredentialsException:
-    print("Invalid username or password.")
+
 def get_basic_info(usrname_tar):
     profile = instaloader.Profile.from_username(loader.context, usrname_tar)
     compa_data = {'username':profile.username,'user_id':profile.userid,'media_count':profile.mediacount,'follower_count' : profile.followers,'following_count':profile.followees,'bio':profile.biography,'external_url': profile.external_url}
@@ -58,8 +46,23 @@ def Latest_data_show(comp_data):
     print('following count:',comp_data['following_count'])
     print('bio:',comp_data['bio'])
     print('external link:',comp_data['external_url'])
+#TODO
 def retrive_comp_data(filen):
     pass
+#main code
+usr = input('enter target username:')
+username = input('enter username:')
+password = input('enter password:')
+try:
+    loader = instaloader.Instaloader()
+    loader.login(username, password)
+    print("Login successful!")
+except instaloader.exceptions.TwoFactorAuthRequiredException:
+    tfa_code = input("Enter 2FA code: ")
+    loader.two_factor_login(tfa_code)
+    print("2FA login successful!")
+except instaloader.exceptions.BadCredentialsException:
+    print("Invalid username or password.")
 while True:
     if os.path.isfile('comp__'):
         m = get_basic_info(usr)
